@@ -116,3 +116,24 @@ protected $except = [
 Now, let's go to the main integration part.
 
     Step 9: To integrate popup checkout, use the below script before the end of body tag.
+
+## SSLcommerz with fixed
+`php artisan make:Model Order -m`
+```
+    public function up()
+    {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->double('amount')->nullable();
+            $table->longText('address')->nullable();
+            $table->string('status')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('currency')->nullable();
+            $table->timestamps();
+        });
+    }
+```
+- `php artisan migrate`
