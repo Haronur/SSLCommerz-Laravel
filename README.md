@@ -60,3 +60,59 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## SSLCommerz-Laravel
+- Consult the Laravel docs on database configuration and ensure you have a working database set up.
+#### Create Database at phpMyAdmin named `sslcommerz-laravel` and setup `.env` file in your root directory 
+
+- Database
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sslcommerz-laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- Run database migrations to create the users table:
+```
+php artisan migrate
+```
+Core Library Directory Structure
+```
+ |-- config/
+    |-- sslcommerz.php
+ |-- app/Library/SslCommerz
+    |-- AbstractSslCommerz.php (core file)
+    |-- SslCommerzInterface.php (core file)
+    |-- SslCommerzNotification.php (core file)
+ |-- README.md
+ |-- orders.sql (sample)
+```
+Instructions:
+
+    Step 1: Download and extract the library files.
+
+    Step 2: Copy the Library folder and put it in the laravel project's app/ directory. If needed, then run composer dump -o.
+
+    Step 3: Copy the config/sslcommerz.php file into your project's config/ folder.
+
+Now, we have already copied the core library files. Let's do copy some other helpers files that is provided to understand the integration process. The other files are not related to core library.
+
+    Step 4: Add STORE_ID and STORE_PASSWORD values on your project's .env file. You can register for a store at https://developer.sslcommerz.com/registration/
+
+    Step 5: Copy the SslCommerzPaymentController into your project's Controllers folder.
+
+    Step 6: Copy the defined routes from routes/web.php into your project's route file.
+
+    Step 7: Add the below routes into the $excepts array of VerifyCsrfToken middleware.
+
+protected $except = [
+    '/pay-via-ajax', '/success','/cancel','/fail','/ipn'
+];
+
+    Step 8: Copy the resources/views/*.blade.php files into your project's resources/views/ folder.
+
+Now, let's go to the main integration part.
+
+    Step 9: To integrate popup checkout, use the below script before the end of body tag.
